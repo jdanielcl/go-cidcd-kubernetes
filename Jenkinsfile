@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         PATH = "/usr/local/go/bin:$PATH"
-        DOCKER_IMAGE_NAME = "harbor.vmware.local/library/go-cicd-kubernetes"
+        DOCKER_IMAGE_NAME = "harbor.corp.local/library/go-cicd-kubernetes"
     }
     stages {
         stage('Build') {
@@ -30,7 +30,7 @@ pipeline {
             }
             steps {
                 script {
-                    docker.withRegistry('https://harbor.vmware.local', 'harbor') {
+                    docker.withRegistry('https://harbor.corp.local', 'harbor') {
                         app.push("${env.BUILD_NUMBER}")
                         app.push("latest")
                     }
