@@ -46,7 +46,7 @@ pipeline {
                 kubernetesDeploy(
                   credentialsType: 'KubeConfig',
                   kubeconfigId: 'kubeconfig',
-                  kubeConfig: [path: '/var/lib/jenkins/workspace/.kube/config'],
+                  kubeConfig: [path: '/var/lib/jenkins/go-cicd-kubernetesv2/.kube/config'],
                   configs: 'kubernetes.yaml',
                   enableConfigSubstitution: true
                 ) 
