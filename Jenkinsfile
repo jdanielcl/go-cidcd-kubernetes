@@ -45,6 +45,7 @@ pipeline {
                 milestone(1)
                 kubernetesDeploy(
                   kubeconfigId: 'kubeconfig',
+                  kubeConfig: [path: '/var/lib/jenkins/workspace/.kube/config'],
                   configs: 'kubernetes.yaml',
                   enableConfigSubstitution: true
                 ) 
