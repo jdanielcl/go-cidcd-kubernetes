@@ -24,7 +24,7 @@ pipeline {
                 }
             }
         }
-        stage('Push Docker Image') {
+        stage('Push Docker Image to Harbor') {
             when {
                 branch 'master'
             }
@@ -37,7 +37,7 @@ pipeline {
                 }
             }
         }
-        stage('DeployToPKS') {
+        stage('DeployToVMwarePKS') {
             when {
                 branch 'master'
             }
