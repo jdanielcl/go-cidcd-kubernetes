@@ -22,9 +22,9 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 
 func main() {
   http.HandleFunc("/", homeHandler)
-  http.Handle("/", http.FileServer(http.Dir("css/")))
-  http.Handle("/", http.FileServer(http.Dir("js/")))
-  http.Handle("/", http.FileServer(http.Dir("vendor/")))
-  http.Handle("/", http.FileServer(http.Dir("scss/")))
+  http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("css"))))
+  http.Handle("/js/", http.StripPrefix("/js/", http.FileServer(http.Dir("js"))))
+  http.Handle("/vendor/", http.StripPrefix("/vendor/", http.FileServer(http.Dir("vendor"))))
+  http.Handle("/scss/", http.StripPrefix("/scss/", http.FileServer(http.Dir("scss"))))
   log.Fatal(http.ListenAndServe(":8181", nil))
 }
