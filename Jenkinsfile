@@ -14,6 +14,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 echo 'Compiling Program'
+                echo DOCKER_IMAGE_NAME
             }
         }
     }
