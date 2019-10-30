@@ -9,6 +9,7 @@ pipeline {
             steps {
                 echo 'Compiling Program'
                 sh 'go test -v'
+                sh 'echo $USER'
             }
         }
         stage('Build Docker Image') {
