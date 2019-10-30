@@ -1,20 +1,18 @@
 pipeline {
     agent any
-
+    environment {
+        DOCKER_IMAGE_NAME = "jdanielcl/go-cicd-kubernetes"
+    }
     stages {
         stage('Build') {
             steps {
-                echo 'Building..'
+                echo 'Compiling Program'
+                sh 'go test -v'
             }
         }
-        stage('Test') {
+        stage('Build Docker Image') {
             steps {
-                echo 'Now is Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Now is Deploying....'
+                echo 'Compiling Program'
             }
         }
     }
