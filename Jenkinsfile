@@ -6,7 +6,7 @@ pipeline {
         DOCKER_CONTAINER_NAME = "go-cidcd-kubernetes"
     }
     stages {
-        stage('JFrog artifactory') {
+        stage('Build Test') {
             steps {
                 echo 'Artifactory JFrog'
                 sh 'go test -v'
@@ -23,10 +23,11 @@ pipeline {
                 }
             }
         }
-        stage('Build') {
+        stage('Build Artifactory') {
             steps {
-                sh 'echo ${USER_JFROG}'
-                sh 'echo ${PASSWORD_JFROG}'
+                sh 'echo $USER_JFROG'
+                SH 'go mod init ${DOCKER_IMAGE_NAME}'
+                sh 'curl -X PUT -$USER_JFROG:$PASSWORD_JFROG -T go.mod "http://104.198.64.55/artifactory/go-cdcd-kubernetes/"'
             }
         }    
         stage('Run docker container'){
