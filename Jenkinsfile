@@ -28,7 +28,7 @@ pipeline {
                 sh 'echo $USER_JFROG'
                 sh 'rm -rf go.mod'
                 sh 'go mod init ${DOCKER_IMAGE_NAME}'
-                sh 'curl -X PUT -u $USER_JFROG:$PASSWORD_JFROG -T go.mod "http://104.198.64.55/artifactory/go-cdcd-kubernetes/"'
+                sh 'curl -X PUT -u $USER_JFROG:$PASSWORD_JFROG -T go.mod "http://104.198.64.55/artifactory/go-cidcd-kubernetes/"'
             }
         }    
         stage('Run docker container'){
