@@ -9,6 +9,23 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Compiling Program'
+                def rtDocker = Artifactory.server 'GoogleJFrog'
+           
+                // Attach custom properties to the published artifacts:
+                rtDocker.addProperty("project-name", DOCKER_IMAGE_NAME).addProperty("status", "stable")
+            
+                // Push a docker image to Artifactory (here we're pushing hello-world:latest). The push method also expects
+                // Artifactory repository name (<target-artifactory-repository>).
+                // Please make sure that <artifactoryDockerRegistry> is configured to reference the <target-artifactory-repository> Artifactory repository. In case it references a different repository, your build will fail with "Could not find manifest.json in Artifactory..." following the push.
+                def buildInfo = rtDocker.push '${DOCKER_IMAGE_NAME}:latest', DOCKER_CONTAINER_NAME
+            
+                // Publish the build-info to Artifactory:
+                server.publishBuildInfo buildInfo
+            }
+        }        
+        stage('JFrog artifactory') {
+            steps {
+                echo 'Artifactory JFrog'
                 sh 'go test -v'
                 sh 'echo $USER'
             }
