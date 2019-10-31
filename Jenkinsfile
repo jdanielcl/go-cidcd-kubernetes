@@ -25,7 +25,8 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'echo ${USER}'
+                sh 'echo ${USER_JFROG}'
+                sh 'echo ${PASSWORD_JFROG}'
             }
         }    
         stage('Run docker container'){
